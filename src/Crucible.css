@@ -1636,8 +1636,33 @@
 
 .danger-zone {
   border: 2px solid #e74c3c;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  background: #fff5f5;
 }
 
-.danger-zone h2 {
+.danger-zone h3 {
   color: #e74c3c;
+  margin-top: 0;
+}
+
+.danger-zone p {
+  color: #c0392b;
+  margin-bottom: 1rem;
+}
+
+.danger-btn {
+  padding: 0.75rem 1.5rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.danger-btn:hover {
+  background: #c0392b;
 }

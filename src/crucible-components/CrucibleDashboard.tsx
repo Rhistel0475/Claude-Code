@@ -121,9 +121,17 @@ const CrucibleDashboard: React.FC = () => {
 };
 
 const ProjectOverview: React.FC = () => {
-  const { project, updateMetadata } = useCrucible();
+  const { project, updateMetadata, clearProject } = useCrucible();
 
   if (!project) return null;
+
+  const handleNewProject = () => {
+    if (confirm('Are you sure you want to start a new book? This will clear all current project data. Make sure you have exported your work first!')) {
+      if (confirm('This action cannot be undone. Are you absolutely sure?')) {
+        clearProject();
+      }
+    }
+  };
 
   const totalWords = project.chapters.reduce((sum, ch) => sum + ch.wordCount, 0);
   const progress = (totalWords / project.metadata.targetWordCount) * 100;
@@ -225,6 +233,14 @@ const ProjectOverview: React.FC = () => {
             <strong>Backups:</strong> {project.backups.length}
           </div>
         </div>
+      </div>
+
+      <div className="danger-zone">
+        <h3>Start New Book</h3>
+        <p>Clear all current project data and start fresh. Make sure to export your work first!</p>
+        <button onClick={handleNewProject} className="danger-btn">
+          Start New Book
+        </button>
       </div>
     </div>
   );
