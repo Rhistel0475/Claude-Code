@@ -10,6 +10,7 @@ import MercyEngine from './MercyEngine';
 import ChapterOutline from './ChapterOutline';
 import ProjectExport from './ProjectExport';
 import StoryVisualization from './StoryVisualization';
+import SaveIndicator from './SaveIndicator';
 
 type CrucibleView =
   | 'overview'
@@ -61,7 +62,10 @@ const CrucibleDashboard: React.FC = () => {
   return (
     <div className="crucible-dashboard">
       <nav className="crucible-nav">
-        <h2>{project.metadata.title}</h2>
+        <div className="nav-header">
+          <h2>{project.metadata.title}</h2>
+          <SaveIndicator />
+        </div>
         <div className="nav-buttons">
           <button
             className={currentView === 'overview' ? 'active' : ''}
