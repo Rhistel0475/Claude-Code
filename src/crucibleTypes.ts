@@ -89,6 +89,18 @@ export interface Chapter {
   notes: string;
 }
 
+export interface WordGoalTracking {
+  dailyGoal: number;
+  weeklyGoal: number;
+  currentStreak: number;
+  longestStreak: number;
+  lastWriteDate: string; // ISO date string
+  writingHistory: Array<{
+    date: string; // ISO date string
+    wordsWritten: number;
+  }>;
+}
+
 export interface ProjectMetadata {
   title: string;
   author: string;
@@ -99,6 +111,7 @@ export interface ProjectMetadata {
   createdAt: Date;
   lastModified: Date;
   currentPhase: 'planning' | 'outlining' | 'drafting' | 'editing';
+  wordGoals?: WordGoalTracking;
 }
 
 export interface CrucibleProject {

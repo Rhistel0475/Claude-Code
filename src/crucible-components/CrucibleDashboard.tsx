@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCrucible } from '../CrucibleContext';
 import ProjectSetup from './ProjectSetup';
 import StrandMapping from './StrandMapping';
@@ -12,6 +12,8 @@ import ProjectExport from './ProjectExport';
 import StoryVisualization from './StoryVisualization';
 import SaveIndicator from './SaveIndicator';
 import ConsistencyChecker from './ConsistencyChecker';
+import QuickNavigation from './QuickNavigation';
+import WordGoalTracker from './WordGoalTracker';
 
 type CrucibleView =
   | 'overview'
@@ -22,6 +24,7 @@ type CrucibleView =
   | 'characters'
   | 'mercy'
   | 'chapters'
+  | 'word-goals'
   | 'visualizations'
   | 'consistency'
   | 'export';
@@ -29,6 +32,25 @@ type CrucibleView =
 const CrucibleDashboard: React.FC = () => {
   const { project } = useCrucible();
   const [currentView, setCurrentView] = useState<CrucibleView>('overview');
+  const [showQuickNav, setShowQuickNav] = useState(false);
+
+  // Keyboard shortcut for Quick Navigation (Ctrl+K or Cmd+K)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setShowQuickNav(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleQuickNavNavigate = (view: string, _itemId?: string) => {
+    setCurrentView(view as CrucibleView);
+    // TODO: If itemId is provided, scroll to or select that item in the view
+  };
 
   if (!project) {
     return <ProjectSetup />;
@@ -52,6 +74,8 @@ const CrucibleDashboard: React.FC = () => {
         return <MercyEngine />;
       case 'chapters':
         return <ChapterOutline />;
+      case 'word-goals':
+        return <WordGoalTracker />;
       case 'visualizations':
         return <StoryVisualization />;
       case 'consistency':
@@ -120,6 +144,12 @@ const CrucibleDashboard: React.FC = () => {
             Chapters
           </button>
           <button
+            className={currentView === 'word-goals' ? 'active' : ''}
+            onClick={() => setCurrentView('word-goals')}
+          >
+            🎯 Word Goals
+          </button>
+          <button
             className={currentView === 'visualizations' ? 'active' : ''}
             onClick={() => setCurrentView('visualizations')}
           >
@@ -140,6 +170,14 @@ const CrucibleDashboard: React.FC = () => {
         </div>
       </nav>
       <div className="crucible-content">{renderView()}</div>
+
+      {/* Quick Navigation Modal */}
+      {showQuickNav && (
+        <QuickNavigation
+          onNavigate={handleQuickNavNavigate}
+          onClose={() => setShowQuickNav(false)}
+        />
+      )}
     </div>
   );
 };
@@ -166,6 +204,149 @@ const ProjectOverview: React.FC = () => {
     drafting: ['Chapter Prose', 'Dialogue', 'Descriptions'],
     editing: ['Revision', 'Polish', 'Final Draft']
   };
+
+  // Generate smart suggestions based on project state
+  const generateSuggestions = () => {
+    const suggestions: Array<{ text: string; action: string; priority: 'high' | 'medium' | 'low' }> = [];
+
+    // Check strands
+    const emptyStrands = [];
+    if (!project.strandMaps.quest.summary) emptyStrands.push('Quest');
+    if (!project.strandMaps.fire.summary) emptyStrands.push('Fire');
+    if (!project.strandMaps.constellation.summary) emptyStrands.push('Constellation');
+    if (emptyStrands.length > 0) {
+      suggestions.push({
+        text: `Define your ${emptyStrands.join(', ')} strand${emptyStrands.length > 1 ? 's' : ''}`,
+        action: 'Go to Story Strands',
+        priority: 'high'
+      });
+    }
+
+    // Check forge points
+    const incompleteForgePoints = project.forgePoints.filter(
+      fp => !fp.stakes || !fp.sacrifice || !fp.questConvergence
+    );
+    if (incompleteForgePoints.length > 0) {
+      suggestions.push({
+        text: `Complete ${incompleteForgePoints.length} forge point${incompleteForgePoints.length > 1 ? 's' : ''}`,
+        action: 'Go to Forge Points',
+        priority: 'high'
+      });
+    }
+
+    // Check beats
+    const emptyBeats = project.beats.filter(
+      b => !b.questStrand && !b.fireStrand && !b.constellationStrand
+    );
+    if (emptyBeats.length > 10) {
+      suggestions.push({
+        text: `${emptyBeats.length} beats need content - try using templates!`,
+        action: 'Go to 36 Beats',
+        priority: 'medium'
+      });
+    }
+
+    // Check characters
+    if (project.characters.length === 0) {
+      suggestions.push({
+        text: 'Create your first character',
+        action: 'Go to Characters',
+        priority: 'high'
+      });
+    } else {
+      const charsWithoutArcs = project.characters.filter(c => !c.arc);
+      if (charsWithoutArcs.length > 0) {
+        suggestions.push({
+          text: `${charsWithoutArcs.length} character${charsWithoutArcs.length > 1 ? 's need' : ' needs'} character arcs`,
+          action: 'Go to Characters',
+          priority: 'medium'
+        });
+      }
+    }
+
+    // Check chapters
+    if (project.metadata.currentPhase === 'outlining' || project.metadata.currentPhase === 'drafting') {
+      if (project.chapters.length === 0) {
+        suggestions.push({
+          text: 'Create your first chapter outline',
+          action: 'Go to Chapters',
+          priority: 'high'
+        });
+      } else {
+        const chaptersWithoutOutlines = project.chapters.filter(ch => !ch.outline);
+        if (chaptersWithoutOutlines.length > 0 && chaptersWithoutOutlines.length < project.chapters.length) {
+          suggestions.push({
+            text: `Outline ${chaptersWithoutOutlines.length} more chapter${chaptersWithoutOutlines.length > 1 ? 's' : ''}`,
+            action: 'Go to Chapters',
+            priority: 'medium'
+          });
+        }
+
+        if (project.metadata.currentPhase === 'drafting') {
+          const chaptersWithoutProse = project.chapters.filter(ch => !ch.prose || ch.prose.trim().length === 0);
+          if (chaptersWithoutProse.length > 0) {
+            suggestions.push({
+              text: `Write prose for ${chaptersWithoutProse.length} chapter${chaptersWithoutProse.length > 1 ? 's' : ''}`,
+              action: 'Go to Chapters',
+              priority: 'high'
+            });
+          }
+        }
+      }
+    }
+
+    // Check word count goals
+    if (!project.metadata.wordGoals && totalWords > 0) {
+      suggestions.push({
+        text: 'Set daily word count goals to track progress',
+        action: 'Go to Word Goals',
+        priority: 'low'
+      });
+    }
+
+    // Check planning docs
+    if (project.planningDocs.length === 0 && project.metadata.currentPhase === 'planning') {
+      suggestions.push({
+        text: 'Create planning documents for world-building and plot notes',
+        action: 'Go to Planning Docs',
+        priority: 'medium'
+      });
+    }
+
+    // Check for mercy moments
+    if (project.mercyLedger.length === 0) {
+      suggestions.push({
+        text: 'Add your first mercy moment to create emotional resonance',
+        action: 'Go to Mercy Engine',
+        priority: 'low'
+      });
+    }
+
+    // Phase-specific suggestions
+    if (project.metadata.currentPhase === 'planning' && emptyStrands.length === 0 && project.forgePoints.every(fp => fp.stakes)) {
+      suggestions.push({
+        text: 'Planning complete! Consider moving to Outlining phase',
+        action: 'Update Phase above',
+        priority: 'medium'
+      });
+    }
+
+    if (progress >= 100 && project.metadata.currentPhase === 'drafting') {
+      suggestions.push({
+        text: 'Draft complete! Time to move to Editing phase',
+        action: 'Update Phase above',
+        priority: 'high'
+      });
+    }
+
+    // Sort by priority
+    const priorityOrder = { high: 0, medium: 1, low: 2 };
+    suggestions.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+
+    return suggestions.slice(0, 5); // Top 5 suggestions
+  };
+
+  const suggestions = generateSuggestions();
 
   return (
     <div className="project-overview">
@@ -258,6 +439,34 @@ const ProjectOverview: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Progress Suggestions */}
+      {suggestions.length > 0 && (
+        <div className="progress-suggestions">
+          <h3>✨ Suggested Next Steps</h3>
+          <p className="suggestions-subtitle">
+            Based on your current progress, here's what to focus on next:
+          </p>
+          <div className="suggestions-list">
+            {suggestions.map((suggestion, idx) => (
+              <div
+                key={idx}
+                className={`suggestion-item priority-${suggestion.priority}`}
+              >
+                <div className="suggestion-icon">
+                  {suggestion.priority === 'high' && '🔴'}
+                  {suggestion.priority === 'medium' && '🟡'}
+                  {suggestion.priority === 'low' && '🟢'}
+                </div>
+                <div className="suggestion-content">
+                  <div className="suggestion-text">{suggestion.text}</div>
+                  <div className="suggestion-action">{suggestion.action}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="danger-zone">
         <h3>Start New Book</h3>

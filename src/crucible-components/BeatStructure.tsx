@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCrucible } from '../CrucibleContext';
 import type { MovementType } from '../crucibleTypes';
 import { MOVEMENTS } from '../crucibleTypes';
+import { applyTemplate } from './beatTemplates';
 
 const BeatStructure: React.FC = () => {
   const { project, updateBeat } = useCrucible();
@@ -17,6 +18,17 @@ const BeatStructure: React.FC = () => {
 
   const toggleBeat = (beatId: string) => {
     setExpandedBeat(expandedBeat === beatId ? null : beatId);
+  };
+
+  const handleUseTemplate = (beatId: string, beatNumber: number) => {
+    const template = applyTemplate(beatNumber);
+    updateBeat(beatId, {
+      title: template.title,
+      description: template.description,
+      questStrand: template.questStrand,
+      fireStrand: template.fireStrand,
+      constellationStrand: template.constellationStrand
+    });
   };
 
   return (
@@ -79,6 +91,19 @@ const BeatStructure: React.FC = () => {
 
             {expandedBeat === beat.id && (
               <div className="beat-card-body">
+                <div className="beat-template-actions">
+                  <button
+                    className="template-btn"
+                    onClick={() => handleUseTemplate(beat.id, beat.number)}
+                    title="Fill this beat with a helpful template"
+                  >
+                    📝 Use Template
+                  </button>
+                  <span className="template-hint">
+                    Get started with pre-written guidance for this beat
+                  </span>
+                </div>
+
                 <div className="beat-field">
                   <label>Title</label>
                   <input
