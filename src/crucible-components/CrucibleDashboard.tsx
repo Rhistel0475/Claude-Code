@@ -9,6 +9,7 @@ import CharacterManagement from './CharacterManagement';
 import MercyEngine from './MercyEngine';
 import ChapterOutline from './ChapterOutline';
 import ProjectExport from './ProjectExport';
+import StoryVisualization from './StoryVisualization';
 
 type CrucibleView =
   | 'overview'
@@ -19,6 +20,7 @@ type CrucibleView =
   | 'characters'
   | 'mercy'
   | 'chapters'
+  | 'visualizations'
   | 'export';
 
 const CrucibleDashboard: React.FC = () => {
@@ -47,6 +49,8 @@ const CrucibleDashboard: React.FC = () => {
         return <MercyEngine />;
       case 'chapters':
         return <ChapterOutline />;
+      case 'visualizations':
+        return <StoryVisualization />;
       case 'export':
         return <ProjectExport />;
       default:
@@ -106,6 +110,12 @@ const CrucibleDashboard: React.FC = () => {
             onClick={() => setCurrentView('chapters')}
           >
             Chapters
+          </button>
+          <button
+            className={currentView === 'visualizations' ? 'active' : ''}
+            onClick={() => setCurrentView('visualizations')}
+          >
+            📊 Visualizations
           </button>
           <button
             className={currentView === 'export' ? 'active' : ''}
