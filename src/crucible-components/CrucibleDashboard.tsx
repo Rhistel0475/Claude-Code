@@ -11,6 +11,7 @@ import ChapterOutline from './ChapterOutline';
 import ProjectExport from './ProjectExport';
 import StoryVisualization from './StoryVisualization';
 import SaveIndicator from './SaveIndicator';
+import ConsistencyChecker from './ConsistencyChecker';
 
 type CrucibleView =
   | 'overview'
@@ -22,6 +23,7 @@ type CrucibleView =
   | 'mercy'
   | 'chapters'
   | 'visualizations'
+  | 'consistency'
   | 'export';
 
 const CrucibleDashboard: React.FC = () => {
@@ -52,6 +54,8 @@ const CrucibleDashboard: React.FC = () => {
         return <ChapterOutline />;
       case 'visualizations':
         return <StoryVisualization />;
+      case 'consistency':
+        return <ConsistencyChecker />;
       case 'export':
         return <ProjectExport />;
       default:
@@ -120,6 +124,12 @@ const CrucibleDashboard: React.FC = () => {
             onClick={() => setCurrentView('visualizations')}
           >
             📊 Visualizations
+          </button>
+          <button
+            className={currentView === 'consistency' ? 'active' : ''}
+            onClick={() => setCurrentView('consistency')}
+          >
+            ✓ Consistency
           </button>
           <button
             className={currentView === 'export' ? 'active' : ''}
