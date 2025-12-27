@@ -887,19 +887,86 @@
   font-size: 1.1rem;
 }
 
-/* Responsive */
+/* Responsive & Mobile Optimizations */
 @media (max-width: 768px) {
+  /* General mobile optimizations */
+  .social-media-manager {
+    padding: 0;
+  }
+
+  .app-header {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+
+  /* Tabs - mobile friendly */
+  .tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Grids */
   .post-grid,
   .template-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.5rem;
   }
 
   .platform-selector {
     grid-template-columns: 1fr 1fr;
   }
 
+  /* Touch-friendly buttons */
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    min-height: 44px;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .btn-icon {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.1rem;
+  }
+
+  /* Section headers */
+  .section-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    padding: 1rem;
+  }
+
+  .section-header button {
+    width: 100%;
+  }
+
+  /* Filters */
   .filters {
     flex-direction: column;
+    padding: 0 1rem;
   }
 
   .filter-group {
@@ -908,17 +975,104 @@
 
   .filter-group select {
     width: 100%;
+    min-height: 44px;
+  }
+
+  /* Form elements - larger touch targets */
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 
   .form-row {
     grid-template-columns: 1fr;
   }
 
+  /* Modal adjustments */
+  .modal-overlay {
+    padding: 0;
+  }
+
+  .modal-content {
+    max-height: 100vh;
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .post-editor form {
+    padding: 1rem;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.25rem;
+  }
+
+  /* Platform tabs */
+  .platform-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+
+  .platform-tab {
+    font-size: 0.875rem;
+    padding: 0.625rem 1rem;
+  }
+
+  /* Post cards */
+  .post-card {
+    padding: 1rem;
+  }
+
+  .post-card h3 {
+    font-size: 1rem;
+  }
+
+  .post-card-actions {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* Template cards */
+  .template-card {
+    padding: 1rem;
+  }
+
+  .template-content pre {
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+
+  /* Campaign cards */
+  .campaign-card {
+    padding: 1rem;
+  }
+
+  .campaign-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Bulk actions */
   .bulk-actions {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
   }
 
+  .bulk-actions button {
+    width: 100%;
+  }
+
+  /* Data actions */
   .data-actions {
     flex-direction: column;
   }
@@ -926,4 +1080,182 @@
   .data-actions button {
     width: 100%;
   }
+
+  /* Platform settings */
+  .platform-config-card {
+    padding: 1rem;
+  }
+
+  .platform-tips {
+    padding: 0.75rem;
+  }
+
+  .platform-tips ul {
+    padding-left: 1.25rem;
+  }
+
+  .platform-tips li {
+    font-size: 0.8rem;
+  }
+
+  /* Category filter */
+  .category-filter {
+    width: 100%;
+  }
+
+  .category-filter select {
+    flex: 1;
+    min-height: 44px;
+  }
+
+  /* Hashtag management */
+  .hashtag-input {
+    flex-direction: column;
+  }
+
+  .hashtag-input input {
+    width: 100%;
+  }
+
+  .hashtag-input button {
+    width: 100%;
+  }
+
+  /* Platform checkboxes */
+  .platform-checkboxes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Empty state */
+  .empty-state {
+    padding: 2rem 1rem;
+  }
+
+  .empty-state p {
+    font-size: 1rem;
+  }
+
+  /* Templates header */
+  .templates-header {
+    padding: 0 1rem;
+  }
+
+  .template-controls {
+    padding: 0 1rem;
+  }
+
+  /* Posts section */
+  .posts-section {
+    padding: 0;
+  }
+
+  .post-list-container {
+    padding: 0.5rem;
+  }
+
+  /* Settings section */
+  .settings-section {
+    padding: 0 1rem;
+  }
+
+  .data-management {
+    padding: 1rem;
+  }
+}
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 480px) {
+  .mode-switcher {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mode-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .platform-selector,
+  .platform-checkboxes {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-tabs {
+    flex-direction: column;
+  }
+
+  .platform-tab {
+    width: 100%;
+  }
+
+  .campaign-meta {
+    font-size: 0.8rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+
+  .post-card-actions {
+    justify-content: center;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 896px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 95vh;
+  }
+
+  .post-editor form {
+    max-height: calc(95vh - 60px);
+    overflow-y: auto;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch targets */
+  .btn-icon,
+  .close-btn,
+  .toggle-switch {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Remove hover effects on touch devices */
+  .btn-icon:hover,
+  .platform-btn:hover,
+  .platform-tab:hover {
+    transform: none;
+  }
+
+  /* Better feedback for touch */
+  .btn-icon:active,
+  .platform-btn:active,
+  .platform-tab:active {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+}
+
+/* PWA - Standalone mode adjustments */
+@media (display-mode: standalone) {
+  .social-media-manager {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .app-header {
+    padding-top: calc(1rem + env(safe-area-inset-top));
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  /* Add dark mode support if needed in the future */
 }
