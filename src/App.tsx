@@ -30,19 +30,20 @@ function App() {
                 className={`mode-btn ${appMode === 'ttrpg' ? 'active' : ''}`}
                 onClick={() => setAppMode('ttrpg')}
               >
-                🎲 TTRPG Manager
+                TTRPG
               </button>
               <button
                 className={`mode-btn ${appMode === 'crucible' ? 'active' : ''}`}
                 onClick={() => setAppMode('crucible')}
               >
-                ⚒ Crucible Writer
+                Crucible
               </button>
               <button
                 className={`mode-btn ${appMode === 'social' ? 'active' : ''}`}
                 onClick={() => setAppMode('social')}
+                style={{ backgroundColor: '#ff0000', color: 'white' }}
               >
-                📱 Social Media
+                SOCIAL MEDIA
               </button>
             </div>
 
