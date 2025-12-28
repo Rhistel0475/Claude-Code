@@ -6,8 +6,9 @@ import { PlatformTemplates } from './PlatformTemplates';
 import { CampaignManager } from './CampaignManager';
 import { PlatformSettings } from './PlatformSettings';
 import { ContentLibrary } from './ContentLibrary';
+import { CalendarView } from './CalendarView';
 
-type SocialTab = 'posts' | 'templates' | 'campaigns' | 'library' | 'settings';
+type SocialTab = 'posts' | 'calendar' | 'templates' | 'campaigns' | 'library' | 'settings';
 
 export function SocialMediaManager() {
   const [activeTab, setActiveTab] = useState<SocialTab>('posts');
@@ -57,6 +58,12 @@ export function SocialMediaManager() {
           📝 My Posts
         </button>
         <button
+          className={`tab ${activeTab === 'calendar' ? 'active' : ''}`}
+          onClick={() => setActiveTab('calendar')}
+        >
+          📅 Calendar
+        </button>
+        <button
           className={`tab ${activeTab === 'templates' ? 'active' : ''}`}
           onClick={() => setActiveTab('templates')}
         >
@@ -93,6 +100,10 @@ export function SocialMediaManager() {
             </div>
             <PostList onEdit={handleEdit} />
           </div>
+        )}
+
+        {activeTab === 'calendar' && (
+          <CalendarView onEditPost={handleEdit} />
         )}
 
         {activeTab === 'templates' && (
