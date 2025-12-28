@@ -10,31 +10,27 @@
 
 /* Mode Switcher */
 .mode-switcher {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   background: #1a1a1a;
-  padding: 0.5rem;
-  gap: 0.5rem;
+  padding: 1rem;
+  gap: 0.75rem;
   width: 100%;
-  max-width: 100%;
 }
 
 .mode-btn {
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   border: 2px solid transparent;
   background: #2a2a2a;
   color: #ccc;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  min-width: 0;
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 .mode-btn:hover {
