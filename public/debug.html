@@ -79,12 +79,43 @@
     </div>
 
     <div class="test-section">
+        <h2>Test 4: Vertical Stack (One Per Line)</h2>
+        <div style="display: flex; flex-direction: column; gap: 10px; max-width: 400px;">
+            <button class="mode-btn" style="width: 100%;">Button 1: 🎲 TTRPG Manager</button>
+            <button class="mode-btn" style="width: 100%;">Button 2: ⚒ Crucible Writer</button>
+            <button class="mode-btn active" style="width: 100%;">Button 3: 📱 Social Media</button>
+        </div>
+        <p><strong>Expected:</strong> 3 stacked buttons (one per line)<br><strong>Question:</strong> How many buttons stacked vertically?</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 5: Simple List (No Flex, No Styling)</h2>
+        <div>
+            <button>A - First Button</button><br><br>
+            <button>B - Second Button</button><br><br>
+            <button>C - Third Button</button><br><br>
+        </div>
+        <p><strong>Expected:</strong> 3 plain buttons labeled A, B, C<br><strong>Question:</strong> Can you see button C?</p>
+    </div>
+
+    <div class="test-section" style="background: yellow; padding: 20px;">
+        <h2>Test 6: High Contrast</h2>
+        <button style="background: red; color: white; padding: 20px; margin: 10px; font-size: 20px;">RED BUTTON 1</button>
+        <button style="background: green; color: white; padding: 20px; margin: 10px; font-size: 20px;">GREEN BUTTON 2</button>
+        <button style="background: blue; color: white; padding: 20px; margin: 10px; font-size: 20px;">BLUE BUTTON 3</button>
+        <p><strong>Can you see the BLUE BUTTON 3?</strong></p>
+    </div>
+
+    <div class="test-section">
         <h2>📋 Results</h2>
         <p>Please tell me for each test:</p>
         <ul>
             <li>Test 1: How many buttons? ___</li>
             <li>Test 2: How many buttons? ___</li>
             <li>Test 3: Can you see "3. Social"? ___</li>
+            <li>Test 4: How many stacked buttons? ___</li>
+            <li>Test 5: Can you see button C? ___</li>
+            <li>Test 6: Can you see the BLUE BUTTON 3? ___</li>
         </ul>
         <p><strong>If you see less than 3 buttons in any test, this is a browser/screen issue.</strong></p>
         <p><strong>If you see all 3 buttons here but not in the main app, it's a React rendering issue.</strong></p>
