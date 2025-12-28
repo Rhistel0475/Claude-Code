@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Debug Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .mode-switcher {
+            display: flex;
+            background: #1a1a1a;
+            padding: 0.5rem;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .mode-btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid transparent;
+            background: #2a2a2a;
+            color: #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .mode-btn:hover {
+            background: #3a3a3a;
+        }
+        .mode-btn.active {
+            background: white;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Button Visibility Debug Test</h1>
+
+    <div class="test-section">
+        <h2>Test 1: Simple Text Buttons (No Emojis)</h2>
+        <div class="mode-switcher">
+            <button class="mode-btn">TTRPG Manager</button>
+            <button class="mode-btn">Crucible Writer</button>
+            <button class="mode-btn active">Social Media</button>
+        </div>
+        <p><strong>Expected:</strong> 3 buttons<br><strong>Question:</strong> How many do you see?</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: With Emojis</h2>
+        <div class="mode-switcher">
+            <button class="mode-btn">🎲 TTRPG Manager</button>
+            <button class="mode-btn">⚒ Crucible Writer</button>
+            <button class="mode-btn active">📱 Social Media</button>
+        </div>
+        <p><strong>Expected:</strong> 3 buttons with emojis<br><strong>Question:</strong> How many do you see?</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Numbered List</h2>
+        <div class="mode-switcher">
+            <button class="mode-btn">1. TTRPG</button>
+            <button class="mode-btn">2. Crucible</button>
+            <button class="mode-btn active">3. Social</button>
+        </div>
+        <p><strong>Expected:</strong> 3 numbered buttons<br><strong>Question:</strong> Can you see button #3?</p>
+    </div>
+
+    <div class="test-section">
+        <h2>📋 Results</h2>
+        <p>Please tell me for each test:</p>
+        <ul>
+            <li>Test 1: How many buttons? ___</li>
+            <li>Test 2: How many buttons? ___</li>
+            <li>Test 3: Can you see "3. Social"? ___</li>
+        </ul>
+        <p><strong>If you see less than 3 buttons in any test, this is a browser/screen issue.</strong></p>
+        <p><strong>If you see all 3 buttons here but not in the main app, it's a React rendering issue.</strong></p>
+    </div>
+</body>
+</html>
