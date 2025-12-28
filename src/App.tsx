@@ -41,9 +41,9 @@ function App() {
               <button
                 className={`mode-btn ${appMode === 'social' ? 'active' : ''}`}
                 onClick={() => setAppMode('social')}
-                style={{ backgroundColor: '#ff0000', color: 'white' }}
+                style={{ backgroundColor: '#ff0000', color: 'white', fontSize: '1.2rem', fontWeight: 'bold' }}
               >
-                SOCIAL MEDIA
+                POST MANAGER
               </button>
             </div>
 
