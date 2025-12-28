@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSocialMedia } from '../SocialMediaContext';
 import type { PostTemplate, SocialPlatform } from '../socialMediaTypes';
+import { UTMBuilder } from './UTMBuilder';
 
 interface PostEditorProps {
   post: PostTemplate | null;
@@ -31,6 +32,7 @@ export function PostEditor({ post, onClose }: PostEditorProps) {
     status: post?.status || 'draft',
   });
   const [hashtagInput, setHashtagInput] = useState('');
+  const [showUTMBuilder, setShowUTMBuilder] = useState(false);
 
   const platformConfig = state.platformConfigs.find(pc => pc.platform === formData.platform);
   const characterCount = formData.content.length;
@@ -170,7 +172,26 @@ export function PostEditor({ post, onClose }: PostEditorProps) {
               onChange={e => setFormData(prev => ({ ...prev, link: e.target.value }))}
               placeholder="https://yourstore.com/product"
             />
+            {formData.link && (
+              <button
+                type="button"
+                onClick={() => setShowUTMBuilder(!showUTMBuilder)}
+                className="btn-secondary-small"
+                style={{ marginTop: '0.5rem' }}
+              >
+                {showUTMBuilder ? '▼ Hide' : '▶'} UTM Tracking Builder
+              </button>
+            )}
           </div>
+
+          {showUTMBuilder && formData.link && (
+            <div className="utm-section">
+              <UTMBuilder
+                baseUrl={formData.link}
+                onUrlGenerated={(url) => setFormData(prev => ({ ...prev, link: url }))}
+              />
+            </div>
+          )}
 
           <div className="form-group">
             <label>Call to Action</label>

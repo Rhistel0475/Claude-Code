@@ -5,8 +5,9 @@ import { PostList } from './PostList';
 import { PlatformTemplates } from './PlatformTemplates';
 import { CampaignManager } from './CampaignManager';
 import { PlatformSettings } from './PlatformSettings';
+import { ContentLibrary } from './ContentLibrary';
 
-type SocialTab = 'posts' | 'templates' | 'campaigns' | 'settings';
+type SocialTab = 'posts' | 'templates' | 'campaigns' | 'library' | 'settings';
 
 export function SocialMediaManager() {
   const [activeTab, setActiveTab] = useState<SocialTab>('posts');
@@ -68,6 +69,12 @@ export function SocialMediaManager() {
           🎯 Campaigns
         </button>
         <button
+          className={`tab ${activeTab === 'library' ? 'active' : ''}`}
+          onClick={() => setActiveTab('library')}
+        >
+          📚 Library
+        </button>
+        <button
           className={`tab ${activeTab === 'settings' ? 'active' : ''}`}
           onClick={() => setActiveTab('settings')}
         >
@@ -94,6 +101,10 @@ export function SocialMediaManager() {
 
         {activeTab === 'campaigns' && (
           <CampaignManager />
+        )}
+
+        {activeTab === 'library' && (
+          <ContentLibrary mode="manager" />
         )}
 
         {activeTab === 'settings' && (
