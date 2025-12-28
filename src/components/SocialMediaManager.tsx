@@ -8,8 +8,9 @@ import { PlatformSettings } from './PlatformSettings';
 import { ContentLibrary } from './ContentLibrary';
 import { CalendarView } from './CalendarView';
 import { HolidayCampaignTemplates } from './HolidayCampaignTemplates';
+import { BulkUploader } from './BulkUploader';
 
-type SocialTab = 'posts' | 'calendar' | 'templates' | 'holidays' | 'campaigns' | 'library' | 'settings';
+type SocialTab = 'posts' | 'calendar' | 'templates' | 'holidays' | 'campaigns' | 'library' | 'bulk' | 'settings';
 
 export function SocialMediaManager() {
   const [activeTab, setActiveTab] = useState<SocialTab>('posts');
@@ -89,6 +90,12 @@ export function SocialMediaManager() {
           📚 Library
         </button>
         <button
+          className={`tab ${activeTab === 'bulk' ? 'active' : ''}`}
+          onClick={() => setActiveTab('bulk')}
+        >
+          📤 Bulk Upload
+        </button>
+        <button
           className={`tab ${activeTab === 'settings' ? 'active' : ''}`}
           onClick={() => setActiveTab('settings')}
         >
@@ -127,6 +134,10 @@ export function SocialMediaManager() {
 
         {activeTab === 'library' && (
           <ContentLibrary mode="manager" />
+        )}
+
+        {activeTab === 'bulk' && (
+          <BulkUploader />
         )}
 
         {activeTab === 'settings' && (
