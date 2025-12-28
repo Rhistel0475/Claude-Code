@@ -7,8 +7,9 @@ import { CampaignManager } from './CampaignManager';
 import { PlatformSettings } from './PlatformSettings';
 import { ContentLibrary } from './ContentLibrary';
 import { CalendarView } from './CalendarView';
+import { HolidayCampaignTemplates } from './HolidayCampaignTemplates';
 
-type SocialTab = 'posts' | 'calendar' | 'templates' | 'campaigns' | 'library' | 'settings';
+type SocialTab = 'posts' | 'calendar' | 'templates' | 'holidays' | 'campaigns' | 'library' | 'settings';
 
 export function SocialMediaManager() {
   const [activeTab, setActiveTab] = useState<SocialTab>('posts');
@@ -70,10 +71,16 @@ export function SocialMediaManager() {
           📋 Templates
         </button>
         <button
+          className={`tab ${activeTab === 'holidays' ? 'active' : ''}`}
+          onClick={() => setActiveTab('holidays')}
+        >
+          🎯 Holidays
+        </button>
+        <button
           className={`tab ${activeTab === 'campaigns' ? 'active' : ''}`}
           onClick={() => setActiveTab('campaigns')}
         >
-          🎯 Campaigns
+          📊 Campaigns
         </button>
         <button
           className={`tab ${activeTab === 'library' ? 'active' : ''}`}
@@ -108,6 +115,10 @@ export function SocialMediaManager() {
 
         {activeTab === 'templates' && (
           <PlatformTemplates onUseTemplate={handleUseTemplate} />
+        )}
+
+        {activeTab === 'holidays' && (
+          <HolidayCampaignTemplates onUseTemplate={handleUseTemplate} />
         )}
 
         {activeTab === 'campaigns' && (

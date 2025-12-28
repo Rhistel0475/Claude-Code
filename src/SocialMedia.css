@@ -1504,6 +1504,210 @@
   font-size: 1.1rem;
 }
 
+/* Holiday Campaign Templates */
+.holiday-campaigns {
+  padding: 1rem;
+}
+
+.holiday-header {
+  margin-bottom: 2rem;
+}
+
+.holiday-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.holiday-header p {
+  margin: 0;
+  color: #666;
+}
+
+.holiday-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.holiday-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.holiday-btn {
+  padding: 0.75rem 1.25rem;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.holiday-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.holiday-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+}
+
+.platform-filter {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.holiday-template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.holiday-template-card {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.holiday-template-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+.holiday-template-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.holiday-badge {
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.holiday-template-card h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.template-meta {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.suggested-hashtags {
+  margin-bottom: 1rem;
+}
+
+.suggested-hashtags strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 0.875rem;
+}
+
+.hashtag-list-preview {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.hashtag-preview {
+  padding: 0.25rem 0.5rem;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.hashtag-more {
+  padding: 0.25rem 0.5rem;
+  background: #f5f5f5;
+  color: #666;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+.posting-tip {
+  padding: 0.75rem;
+  background: #fff8e1;
+  border-left: 3px solid #ffc107;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.posting-tip strong {
+  color: #f57c00;
+}
+
+.holiday-planning-tips {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.holiday-planning-tips h3 {
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.timeline-item {
+  padding: 1rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 8px;
+  border-left: 4px solid #1976d2;
+}
+
+.timeline-date {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #1976d2;
+}
+
+.timeline-details {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.timeline-details strong {
+  color: #333;
+}
+
 /* Empty State */
 .empty-state {
   text-align: center;
