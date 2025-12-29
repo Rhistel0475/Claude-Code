@@ -29,7 +29,7 @@ export function HamburgerMenu({ currentMode, onNavigate }: HamburgerMenuProps) {
           </span>
         </button>
 
-        <div className="nav-title">Rentals Web Apps</div>
+        <div className="nav-title">Rhistel Web Apps</div>
       </nav>
 
       {isOpen && (

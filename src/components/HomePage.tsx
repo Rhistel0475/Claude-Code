@@ -8,7 +8,7 @@ export function HomePage({ onSelectApp }: HomePageProps) {
   return (
     <div className="homepage">
       <div className="homepage-hero">
-        <h1 className="homepage-title">Rentals Web Apps</h1>
+        <h1 className="homepage-title">Rhistel Web Apps</h1>
         <p className="homepage-subtitle">Professional tools for creators and managers</p>
       </div>
 
