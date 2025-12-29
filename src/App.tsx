@@ -8,15 +8,17 @@ import { InformationAssignment } from './components/InformationAssignment';
 import { NPCInteraction } from './components/NPCInteraction';
 import CrucibleDashboard from './crucible-components/CrucibleDashboard';
 import { SocialMediaManager } from './components/SocialMediaManager';
+import { HomePage } from './components/HomePage';
+import { HamburgerMenu } from './components/HamburgerMenu';
 import './App.css';
 import './Crucible.css';
 import './SocialMedia.css';
 
 type Tab = 'npcs' | 'information' | 'assignment' | 'interaction';
-type AppMode = 'ttrpg' | 'crucible' | 'social';
+export type AppMode = 'home' | 'ttrpg' | 'crucible' | 'social';
 
 function App() {
-  const [appMode, setAppMode] = useState<AppMode>('ttrpg');
+  const [appMode, setAppMode] = useState<AppMode>('home');
   const [activeTab, setActiveTab] = useState<Tab>('npcs');
 
   return (
@@ -24,28 +26,14 @@ function App() {
       <CrucibleProvider>
         <SocialMediaProvider>
           <div className="app">
-            {/* Mode Switcher */}
-            <div className="mode-switcher">
-              <button
-                className={`mode-btn ${appMode === 'ttrpg' ? 'active' : ''}`}
-                onClick={() => setAppMode('ttrpg')}
-              >
-                TTRPG
-              </button>
-              <button
-                className={`mode-btn ${appMode === 'crucible' ? 'active' : ''}`}
-                onClick={() => setAppMode('crucible')}
-              >
-                Crucible
-              </button>
-              <button
-                className={`mode-btn ${appMode === 'social' ? 'active' : ''}`}
-                onClick={() => setAppMode('social')}
-                style={{ backgroundColor: '#ff0000', color: 'white', fontSize: '1.2rem', fontWeight: 'bold' }}
-              >
-                POST MANAGER
-              </button>
-            </div>
+            {/* Hamburger Menu - Only show when not on home page */}
+            {appMode !== 'home' && (
+              <HamburgerMenu currentMode={appMode} onNavigate={setAppMode} />
+            )}
+
+          {appMode === 'home' && (
+            <HomePage onSelectApp={setAppMode} />
+          )}
 
           {appMode === 'ttrpg' && (
             <>
