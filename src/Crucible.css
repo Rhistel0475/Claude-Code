@@ -1641,3 +1641,400 @@
 .danger-zone h2 {
   color: #e74c3c;
 }
+
+/* ==================== MOBILE RESPONSIVE STYLES ==================== */
+@media (max-width: 768px) {
+  /* Dashboard */
+  .crucible-dashboard {
+    padding: 0;
+  }
+
+  .dashboard-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .dashboard-description {
+    font-size: 0.875rem;
+  }
+
+  /* Navigation */
+  .crucible-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 0.5rem;
+  }
+
+  .crucible-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .crucible-nav-btn {
+    white-space: nowrap;
+    font-size: 0.875rem;
+    padding: 0.875rem 1.25rem;
+    min-height: 44px;
+  }
+
+  /* Main Content */
+  .crucible-main {
+    padding: 1rem;
+  }
+
+  /* Section Panels */
+  .section-panel {
+    padding: 1rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .section-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .section-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .section-actions button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  /* Character Grid */
+  .character-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Character Cards */
+  .character-card {
+    padding: 1rem;
+  }
+
+  .character-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .character-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .character-card-actions button {
+    flex: 1;
+    min-height: 40px;
+    font-size: 0.85rem;
+  }
+
+  /* Forms */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    padding: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 16px; /* Prevents iOS zoom */
+    min-height: 44px;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .form-buttons button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  /* Modals */
+  .modal-overlay {
+    padding: 0;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+    max-height: calc(100vh - 140px);
+  }
+
+  .modal-footer {
+    padding: 1rem;
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .modal-footer button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  /* Plot Thread Cards */
+  .thread-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .thread-card {
+    padding: 1rem;
+  }
+
+  .thread-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .thread-actions {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .thread-actions button {
+    flex: 1;
+    min-height: 40px;
+  }
+
+  /* Timeline */
+  .timeline-event {
+    padding: 1rem;
+  }
+
+  .timeline-event-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* Export/Import */
+  .export-section,
+  .import-section {
+    padding: 1rem;
+  }
+
+  .export-buttons,
+  .import-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .export-buttons button,
+  .import-buttons button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-item {
+    padding: 0.75rem;
+  }
+
+  /* Backup List */
+  .backup-list {
+    gap: 0.75rem;
+  }
+
+  .backup-item {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .backup-actions {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .backup-actions button {
+    flex: 1;
+    min-height: 40px;
+  }
+
+  /* Relationships */
+  .relationship-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .relationship-card {
+    padding: 1rem;
+  }
+
+  /* Notes */
+  .note-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .note-card {
+    padding: 1rem;
+  }
+
+  .note-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .note-actions {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .note-actions button {
+    flex: 1;
+    min-height: 40px;
+  }
+
+  /* Tags */
+  .tag-list {
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* Filters */
+  .filter-section {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .filter-group select {
+    width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  /* Search */
+  .search-bar {
+    width: 100%;
+  }
+
+  .search-bar input {
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  /* Tabs */
+  .tab-list {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tab-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-button {
+    white-space: nowrap;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+  }
+
+  /* Danger Zone */
+  .danger-zone {
+    padding: 1rem;
+  }
+
+  .danger-zone button {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .crucible-nav-btn:hover,
+  .character-card:hover,
+  .thread-card:hover,
+  button:hover {
+    transform: none;
+  }
+
+  /* Better feedback for touch */
+  .crucible-nav-btn:active,
+  button:active {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+
+  .character-card:active,
+  .thread-card:active {
+    transform: scale(0.99);
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .crucible-nav-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .modal-content {
+    padding: 0;
+  }
+}
