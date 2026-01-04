@@ -19,6 +19,8 @@ import {
 
 interface CrucibleContextType {
   project: CrucibleProject | null;
+  saveStatus: 'saved' | 'saving' | 'error';
+  lastSaved: Date | null;
   createNewProject: (metadata: ProjectMetadata) => void;
   updateMetadata: (metadata: Partial<ProjectMetadata>) => void;
   updateStrandMap: (type: 'quest' | 'fire' | 'constellation', strandMap: StrandMap) => void;
@@ -99,6 +101,9 @@ const initializeForgePoints = (): ForgePoint[] => {
 
 export const CrucibleProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [project, setProject] = useState<CrucibleProject | null>(null);
+  const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'error'>('saved');
+  const [lastSaved, setLastSaved] = useState<Date | null>(null);
+  const [tabId] = useState(() => `tab-${Date.now()}-${Math.random()}`);
 
   // Load project from localStorage on mount
   useEffect(() => {
@@ -114,8 +119,10 @@ export const CrucibleProvider: React.FC<{ children: ReactNode }> = ({ children }
           timestamp: new Date(b.timestamp)
         }));
         setProject(parsed);
+        setLastSaved(new Date(parsed.metadata.lastModified));
       } catch (error) {
         console.error('Error loading project:', error);
+        setSaveStatus('error');
       }
     }
   }, []);
@@ -123,9 +130,45 @@ export const CrucibleProvider: React.FC<{ children: ReactNode }> = ({ children }
   // Save project to localStorage whenever it changes
   useEffect(() => {
     if (project) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(project));
+      setSaveStatus('saving');
+
+      try {
+        // Add debounce to prevent too many saves
+        const timeoutId = setTimeout(() => {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(project));
+          localStorage.setItem('crucible-last-tab', tabId);
+          setSaveStatus('saved');
+          setLastSaved(new Date());
+        }, 300);
+
+        return () => clearTimeout(timeoutId);
+      } catch (error) {
+        console.error('Error saving project:', error);
+        setSaveStatus('error');
+      }
     }
-  }, [project]);
+  }, [project, tabId]);
+
+  // Detect conflicts from other tabs
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY && e.newValue && project) {
+        const lastTab = localStorage.getItem('crucible-last-tab');
+        if (lastTab !== tabId) {
+          // Another tab made changes
+          const shouldReload = confirm(
+            'This project was modified in another tab. Would you like to reload to see the latest changes? (Unsaved changes in this tab will be lost)'
+          );
+          if (shouldReload) {
+            window.location.reload();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [project, tabId]);
 
   const createNewProject = (metadata: ProjectMetadata) => {
     const newProject: CrucibleProject = {
@@ -436,6 +479,8 @@ export const CrucibleProvider: React.FC<{ children: ReactNode }> = ({ children }
     <CrucibleContext.Provider
       value={{
         project,
+        saveStatus,
+        lastSaved,
         createNewProject,
         updateMetadata,
         updateStrandMap,

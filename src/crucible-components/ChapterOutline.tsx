@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useCrucible } from '../CrucibleContext';
 import type { Chapter } from '../crucibleTypes';
+import DistractionFreeMode from './DistractionFreeMode';
 
 const ChapterOutline: React.FC = () => {
   const { project, addChapter, updateChapter, deleteChapter } = useCrucible();
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [distractionFreeMode, setDistractionFreeMode] = useState(false);
 
   if (!project) return null;
 
@@ -236,7 +238,16 @@ const ChapterOutline: React.FC = () => {
             </div>
 
             <div className="chapter-field">
-              <label>Prose Draft</label>
+              <div className="field-header-with-action">
+                <label>Prose Draft</label>
+                <button
+                  className="focus-mode-btn"
+                  onClick={() => setDistractionFreeMode(true)}
+                  title="Enter Distraction-Free Writing Mode"
+                >
+                  🎯 Focus Mode
+                </button>
+              </div>
               <textarea
                 value={selectedCh.prose}
                 onChange={(e) => {
@@ -284,6 +295,14 @@ const ChapterOutline: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Distraction-Free Mode */}
+      {distractionFreeMode && selectedCh && (
+        <DistractionFreeMode
+          chapter={selectedCh}
+          onClose={() => setDistractionFreeMode(false)}
+        />
+      )}
     </div>
   );
 };
