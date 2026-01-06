@@ -1,42 +1,41 @@
 import { useState } from 'react';
 import { GameProvider } from './GameContext';
 import { CrucibleProvider } from './CrucibleContext';
+import { SocialMediaProvider } from './SocialMediaContext';
 import { NPCManagement } from './components/NPCManagement';
 import { InformationManagement } from './components/InformationManagement';
 import { InformationAssignment } from './components/InformationAssignment';
 import { NPCInteraction } from './components/NPCInteraction';
 import CrucibleDashboard from './crucible-components/CrucibleDashboard';
+import { SocialMediaManager } from './components/SocialMediaManager';
+import { HomePage } from './components/HomePage';
+import { HamburgerMenu } from './components/HamburgerMenu';
 import './App.css';
 import './Crucible.css';
+import './SocialMedia.css';
 
 type Tab = 'npcs' | 'information' | 'assignment' | 'interaction';
-type AppMode = 'ttrpg' | 'crucible';
+export type AppMode = 'home' | 'ttrpg' | 'crucible' | 'social';
 
 function App() {
-  const [appMode, setAppMode] = useState<AppMode>('ttrpg');
+  const [appMode, setAppMode] = useState<AppMode>('home');
   const [activeTab, setActiveTab] = useState<Tab>('npcs');
 
   return (
     <GameProvider>
       <CrucibleProvider>
-        <div className="app">
-          {/* Mode Switcher */}
-          <div className="mode-switcher">
-            <button
-              className={`mode-btn ${appMode === 'ttrpg' ? 'active' : ''}`}
-              onClick={() => setAppMode('ttrpg')}
-            >
-              🎲 TTRPG Manager
-            </button>
-            <button
-              className={`mode-btn ${appMode === 'crucible' ? 'active' : ''}`}
-              onClick={() => setAppMode('crucible')}
-            >
-              ⚒ Crucible Writer
-            </button>
-          </div>
+        <SocialMediaProvider>
+          <div className="app">
+            {/* Hamburger Menu - Only show when not on home page */}
+            {appMode !== 'home' && (
+              <HamburgerMenu currentMode={appMode} onNavigate={setAppMode} />
+            )}
 
-          {appMode === 'ttrpg' ? (
+          {appMode === 'home' && (
+            <HomePage onSelectApp={setAppMode} />
+          )}
+
+          {appMode === 'ttrpg' && (
             <>
               <header className="app-header">
                 <h1>🎲 TTRPG NPC Manager</h1>
@@ -81,10 +80,13 @@ function App() {
                 <p>All data is saved locally in your browser</p>
               </footer>
             </>
-          ) : (
-            <CrucibleDashboard />
           )}
-        </div>
+
+          {appMode === 'crucible' && <CrucibleDashboard />}
+
+          {appMode === 'social' && <SocialMediaManager />}
+          </div>
+        </SocialMediaProvider>
       </CrucibleProvider>
     </GameProvider>
   );
