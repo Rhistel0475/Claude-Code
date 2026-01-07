@@ -3,18 +3,26 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "bin": {
+    "claude": "./dist/cli/index.js"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:cli": "tsc -p tsconfig.cli.json",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.10.4",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
