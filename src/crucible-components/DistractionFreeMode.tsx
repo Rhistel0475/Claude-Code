@@ -18,7 +18,7 @@ const DistractionFreeMode: React.FC<DistractionFreeModeProps> = ({ chapter, onCl
   const [lineHeight, setLineHeight] = useState(1.8);
   const [maxWidth, setMaxWidth] = useState(700);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const pomodoroIntervalRef = useRef<number | null>(null);
+  const pomodoroIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Word count
   const wordCount = prose.trim().split(/\s+/).filter(word => word.length > 0).length;
